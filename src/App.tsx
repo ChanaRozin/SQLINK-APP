@@ -1,23 +1,55 @@
+import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Router, Switch,RouteProps } from 'react-router-dom';
+import { BasicCard } from './pages/card/card';
+import { Information } from './pages/information';
 import { Login } from './pages/login';
+import { useRootStore } from './stores/root-store/use-root-store';
 
 
-function App() {
+export const App = observer(() => {
+  const { routerStore } = useRootStore();
+
   return (
-    <Router>
-      <Routes>
+    <Router history={routerStore.history}  >
+      <Switch>
         <Route
           path={'/login'}
-          element={<Login />} />
-      </Routes>
-      <Routes>
+          component={() => (<Login />)}
+        />
         <Route
+          path={'/info'}
+          component={() => (<Information />)}
+        /> 
+         <Route
           path={'/'}
-          element={<Login />} />
-      </Routes>
-    </Router>
-  );
-}
+          component={() => (<Login />)}
+        />
+      </Switch>
+    </Router >
 
-export default App;
+
+
+
+
+// <Router>
+// <Routes>
+//   <Route
+//     path={'/icon-start/:businessId/:url'}
+//     element={<IconStart />} />
+// </Routes>
+// <Routes>
+//   <Route
+//     path={'/icon-start/callHotline/:hotlineId/:url/:language'}
+//     element={<WidgetHotlineStart />} />
+// </Routes>
+// <Routes>
+//   <Route
+//     path={'/wix-error'}
+//     element={<WixError />} />
+// </Routes>
+// </Router>
+  );
+})
+
+
