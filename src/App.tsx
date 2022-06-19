@@ -1,11 +1,9 @@
-import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { Route, Router, Switch,RouteProps } from 'react-router-dom';
-import { BasicCard } from './pages/card/card';
-import { Information } from './pages/information';
-import { Login } from './pages/login';
+import { observer } from 'mobx-react-lite';
+import { Route, Router, Switch } from 'react-router-dom';
+import { Information } from './pages/information/information';
+import { Login } from './pages/login/login';
 import { useRootStore } from './stores/root-store/use-root-store';
-
 
 export const App = observer(() => {
   const { routerStore } = useRootStore();
@@ -20,35 +18,13 @@ export const App = observer(() => {
         <Route
           path={'/info'}
           component={() => (<Information />)}
-        /> 
-         <Route
+        />
+        <Route
           path={'/'}
           component={() => (<Login />)}
         />
       </Switch>
     </Router >
-
-
-
-
-
-// <Router>
-// <Routes>
-//   <Route
-//     path={'/icon-start/:businessId/:url'}
-//     element={<IconStart />} />
-// </Routes>
-// <Routes>
-//   <Route
-//     path={'/icon-start/callHotline/:hotlineId/:url/:language'}
-//     element={<WidgetHotlineStart />} />
-// </Routes>
-// <Routes>
-//   <Route
-//     path={'/wix-error'}
-//     element={<WixError />} />
-// </Routes>
-// </Router>
   );
 })
 

@@ -1,0 +1,26 @@
+@import '../../shared/lib/form/input/input.module.scss';
+
+.grid {
+    height: 150px;
+    justify-content: center;
+    display: flex;
+    position: relative;
+    width: 100%;
+    align-items: center;
+}
+
+.input {
+    font-family: Rubik !important;
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+.statistic {
+    span {
+        font-weight: bold;
+    }
+
+    position: relative;
+    right: 11%;
+    font-size: 20px;
+}

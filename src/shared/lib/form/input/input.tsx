@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
-import { FieldRenderProps, Form } from 'react-final-form';
-import { showError } from './form/form-errors';
+import { FieldRenderProps } from 'react-final-form';
+import { showError } from '../form-errors';
+import styles from './input.module.scss';
 
 type Props = {
     label?: string | ReactNode | any;
@@ -12,11 +13,9 @@ export const Input = (props: Props) => {
         ...inputProps
     } = props;
 
-
-
     return (
         <div>
-            <input
+            <input className={styles.input}
                 {...inputProps}
             />
         </div>
@@ -34,6 +33,7 @@ export const FinalFormInput = <T extends string | number>(
     } = props;
     return (
         <div>
+            <label>{label}</label>
             <Input
                 {...input}
                 {...inputProps}
