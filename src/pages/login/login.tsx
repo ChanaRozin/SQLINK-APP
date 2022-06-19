@@ -5,7 +5,7 @@ import { useRootStore } from '../../stores/root-store/use-root-store';
 import { FinalFormInput } from '../../shared/lib/form/input/input';
 import { Button } from '../../shared/lib/button/button';
 import { LoginForm } from '../../stores/user-auth-store';
-import { Title } from '../title/title';
+import { Title } from '../../shared/title/title';
 
 
 

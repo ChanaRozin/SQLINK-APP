@@ -1,4 +1,4 @@
-import { Title } from './title/title';
+import { Title } from '../shared/title/title';
 import { Card, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import { useRootStore } from '../stores/root-store/use-root-store';

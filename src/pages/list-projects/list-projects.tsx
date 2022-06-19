@@ -9,7 +9,7 @@ import { Button } from '../../shared/lib/button/button';
 import { Table } from 'react-bootstrap';
 import styles from './list-projects.module.scss';
 import { BarTable } from '../top-bar-table/top-bar-table';
-import { Title } from '../title/title';
+import { Title } from '../../shared/title/title';
 
 export const ListProjects = observer(() => {
 
