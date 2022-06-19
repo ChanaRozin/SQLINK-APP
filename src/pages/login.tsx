@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './login.module.scss';
 import { observer } from 'mobx-react-lite';
 import { Field, Form } from 'react-final-form';
@@ -12,6 +12,9 @@ import { LoginForm } from '../stores/user-auth-store';
 
 export const Login = observer(() => {
     const { userAuthStore } = useRootStore();
+    useEffect(()=>{
+        console.log("vkkkkkkkkkkkkkkkkkkkk");
+      },[])
     // const [signUpStore] = useState(createSignUpStore);
     // const [onLoad, setOnLoad] = useState<boolean>(true);
 

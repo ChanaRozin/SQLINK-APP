@@ -65,7 +65,6 @@ export class UserAuthStore {
 
 validate=(form:LoginForm)=>{
   const errors: FormErrors<LoginForm> = {};
-  if(form.email||form.password){
   if(form.email){
       let lastAtPos = form.email.lastIndexOf('@');
       let lastDotPos = form.email.lastIndexOf('.');
@@ -81,10 +80,9 @@ validate=(form:LoginForm)=>{
        errors.password='Is not strong password, The Password must include...'
       } 
     }
-      if(!Object.keys(errors).length){
+      if(!Object.keys(errors).length&&form.email&&form.password){
       this.disabledFormLogin=false;
       }
-    }
       else{
         this.disabledFormLogin=true;
       }
@@ -108,7 +106,6 @@ return errors;
   };
 
 }
-
   // logout() {
   //   this.tokenStorage.removeToken();
   //   this.user = undefined;
