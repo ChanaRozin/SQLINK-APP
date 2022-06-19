@@ -14,10 +14,11 @@ export type Project = {
 }
 export class ListProjectsStore {
     listProjectsUser: Project[] = [];
+    listProjectsUserFilter: Project[] = [];
     columnsData: any = [];
     optionToSort: { key: string, type: TypeOfTag }[] = [];
-    optionToSortValue:string[]=['score'];
-
+    optionToSortValue: string[] = ['score'];
+    filterValue: string = "";
     constructor(
         public apiClient: ApiClient,
     ) {
@@ -45,27 +46,35 @@ export class ListProjectsStore {
 
 
     sortBy = (value: any) => {
-        const value1=value as string[]
+        const value1 = value as string[]
         const name: keyof Project = value1[0] as keyof Project;
         const type: TypeOfTag = value1[1] as TypeOfTag;
-        this.optionToSortValue=value1;
+        this.optionToSortValue = value1;
         switch (type) {
             case 'number':
                 {
                     this.listProjectsUser = this.listProjectsUser.slice().sort((a, b) => Number(a[name]) - Number(b[name]));
+                    this.listProjectsUserFilter = this.listProjectsUserFilter.slice().sort((a, b) => Number(a[name]) - Number(b[name]));
                     return;
                 }
             case 'string':
                 {
-                    this.listProjectsUser = this.listProjectsUser.slice().sort((a, b) => String(a[name]).localeCompare(String(b[name])));;
+                    this.listProjectsUser = this.listProjectsUser.slice().sort((a, b) => String(a[name]).localeCompare(String(b[name])));
+                    this.listProjectsUserFilter = this.listProjectsUserFilter.slice().sort((a, b) => String(a[name]).localeCompare(String(b[name])));
                     return;
                 }
             case 'boolean':
                 {
-                    this.listProjectsUser = this.listProjectsUser.slice().sort((a, b) => a[name] == b[name] ? 0 : a[name] ? -1 : 1);;
+                    this.listProjectsUser = this.listProjectsUser.slice().sort((a, b) => a[name] == b[name] ? 0 : a[name] ? -1 : 1);
+                    this.listProjectsUserFilter = this.listProjectsUserFilter.slice().sort((a, b) => a[name] == b[name] ? 0 : a[name] ? -1 : 1);;
                     return;
                 }
         }
     };
+
+    filterByName = (value: any) => {
+        this.filterValue = value
+        this.listProjectsUserFilter = this.listProjectsUser.filter(item => { return item.name == value });
+    }
 
 }
