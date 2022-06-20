@@ -30,17 +30,23 @@ export class UserAuthStore {
     });
   }
 
-  get isAuthenticated() {
-    return !!this.user?.name;
+  validateEmail = (str: string) => {
+    return /^[^<>()[\]\\,;:\%#^\s@\"$&!@]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z0-9]+\.)+[a-zA-Z]{2,}))$/.test(str);
+  }
+
+  validateEnglishOnly = (str: string) => {
+    const english = /^[a-zA-Z]+$/;
+    return english.test(str.replace(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?0-9]/g, ''));
   }
 
   validate = (form: LoginForm) => {
     const errors: FormErrors<LoginForm> = {};
     if (form.email) {
-      let lastAtPos = form.email.lastIndexOf('@');
-      let lastDotPos = form.email.lastIndexOf('.');
-      if (!(lastAtPos < lastDotPos && lastAtPos > 0 && form.email.indexOf('@@') === -1 && lastDotPos > 2 && (form.email.length - lastDotPos) > 2)) {
+      if (!this.validateEmail(form.email)) {
         errors.email = "Email is not valid";
+      }
+      if (!this.validateEnglishOnly(form.email)) {
+        errors.email = "Email cannot contain letters not in English";
       }
     }
     if (form.password) {
@@ -48,7 +54,10 @@ export class UserAuthStore {
         minLength: 8, minLowercase: 1,
         minUppercase: 1, minNumbers: 1, minSymbols: 1
       })) {
-        errors.password = 'Is not strong password, The Password must include...'
+        errors.password = "It isn't strong password, The password must include least 8 characters uppercase and lowercase letter, number and symbol";
+      }
+      if (!this.validateEnglishOnly(form.password)) {
+        errors.password = "Password can contain only English letters";
       }
     }
     if (!Object.keys(errors).length && form.email && form.password) {

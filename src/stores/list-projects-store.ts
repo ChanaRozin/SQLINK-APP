@@ -23,6 +23,8 @@ export class ListProjectsStore {
     optionToSort: { label: string, value: TypeOfTag }[] = [];
     percentageProjectsDeadline: number = 0;
     averageScore: number = 0;
+    columFilter: keyof Project = "name";
+
     constructor(
         public apiClient: ApiClient,
     ) {
@@ -49,12 +51,11 @@ export class ListProjectsStore {
                 value: typeof item[1]
             })
         });
-        // this.optionToSort = [{
-        //     label: " key[0] as string",
-        //     value: "typeof key[1] as string"
-        // }]
     };
 
+    setColumFilter = (label: string | undefined) => {
+        this.columFilter = label as keyof Project
+    }
 
     sortBy = (label: string | undefined, type: TypeOfTag | undefined) => {
         const name = label as keyof Project;
@@ -83,19 +84,19 @@ export class ListProjectsStore {
         if (form.filterValue === undefined)
             this.listProjectsUserFilter = this.listProjectsUser
         else
-            this.listProjectsUserFilter = this.listProjectsUser.filter(item => { return item.name.includes(form.filterValue) });
+            this.listProjectsUserFilter = this.listProjectsUser.filter(item => { return item[this.columFilter].toString().includes(form.filterValue) });
         this.setAverageScore();
         this.setPercentageProjectsDeadline();
     }
 
     setPercentageProjectsDeadline = () => {
         const count = this.listProjectsUserFilter.filter(project => project.madeDadeline === true);
-        this.percentageProjectsDeadline = count.length / this.listProjectsUserFilter.length;
+        this.percentageProjectsDeadline = count.length / this.listProjectsUserFilter.length * 100;
     }
 
     setAverageScore = () => {
         const sumScore = this.listProjectsUserFilter.reduce((accumulator, current) => accumulator + current.score, 0);
-        this.averageScore = sumScore / this.listProjectsUserFilter.length
+        this.averageScore = sumScore / this.listProjectsUserFilter.length;
     }
 
 }

@@ -41,7 +41,7 @@ export const FinalFormInput = <T extends string | number>(
                 placeholder={placeholder}
                 style={{ fontFamily: 'Rubik' }}
             />
-            <span>{showError(props)}</span>
+            <div className={styles.error}>{showError(props)}</div>
 
         </div>
     );

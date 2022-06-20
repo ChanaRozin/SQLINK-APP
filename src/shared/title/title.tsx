@@ -1,14 +1,14 @@
 import { observer } from "mobx-react-lite";
 import styles from './title.module.scss';
 
-type Props={
-    title:string
+type Props = {
+  title: string
 }
-export const Title = observer((props:Props) => {
+export const Title = observer((props: Props) => {
 
-    const {title}=props;
+  const { title } = props;
 
-      return (
+  return (
     <p className={styles.title}>{title}</p>
-      );
-    })
+  );
+})

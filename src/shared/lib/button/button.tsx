@@ -17,11 +17,6 @@ export const Button = (props: Props) => {
     <button
       {...buttonProps}
       className={styles.button}
-      onClick={(e) => {
-        if (buttonProps.onClick) {
-          buttonProps.onClick(e);
-        }
-      }}
     >
       <div>
         {loading ? "Loading..." : children}

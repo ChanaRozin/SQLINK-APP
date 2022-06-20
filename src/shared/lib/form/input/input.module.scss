@@ -1,6 +1,16 @@
-.input{
+.input {
     width: 300px;
     height: 40px;
     border-color: #b3b3b3;
     border-radius: 5px;
+    font-family: Rubik !important;
+}
+
+.error {
+    color: red;
+    width: 500px;
+}
+
+label {
+    font-size: 18px;
 }

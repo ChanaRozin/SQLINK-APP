@@ -2,17 +2,11 @@
 
 .grid {
     height: 150px;
-    justify-content: center;
+    justify-content: space-around;
     display: flex;
     position: relative;
     width: 100%;
     align-items: center;
-}
-
-.input {
-    font-family: Rubik !important;
-    margin-top: 2%;
-    margin-left: 2%;
 }
 
 .statistic {
@@ -21,6 +15,10 @@
     }
 
     position: relative;
-    right: 11%;
+    right: 2%;
     font-size: 20px;
+}
+
+.sortAndFilter {
+    display: flex;
 }
